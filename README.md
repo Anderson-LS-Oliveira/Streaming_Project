@@ -6,7 +6,7 @@
 
 | Equipe    | Email                  |
 |-----------|-----------------------|
-| Anderson  | andersonlsoliveira02@email.com    |
+| Anderson  | andersonlsoliveira02@gmail.com    |
 | Vitor Morini  |     |
 
 ## Configurações
