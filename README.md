@@ -33,39 +33,61 @@
 ### Criação do schema e tabelas
 
 ```sql
--- Aqui entra todo o SQL de criação de tabelas
-## Instruções SQL
-
-### Criação do schema e tabelas
-
-```sql
--- Criação do schema
 CREATE DATABASE IF NOT EXISTS StreamingProject;
 USE StreamingProject;
 
--- Tabela USUARIO
-CREATE TABLE IF NOT EXISTS Usuario (
+-- Usuário
+CREATE TABLE Usuario (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(100) NOT NULL
 );
 
--- Tabela VIDEO
-CREATE TABLE IF NOT EXISTS Video (
+-- Perfil (um usuário pode ter vários perfis)
+CREATE TABLE Perfil (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(id)
+);
+
+-- Categoria (um vídeo pertence a uma categoria)
+CREATE TABLE Categoria (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+-- Vídeo
+CREATE TABLE Video (
     id INT AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(200) NOT NULL,
     descricao TEXT,
-    duracao INT NOT NULL
+    duracao INT NOT NULL,
+    categoria_id INT NOT NULL,
+    FOREIGN KEY (categoria_id) REFERENCES Categoria(id)
 );
 
--- Tabela VISUALIZACAO
-CREATE TABLE IF NOT EXISTS Visualizacao (
+-- Visualização (relaciona Perfil x Vídeo, com atributos extras)
+CREATE TABLE Visualizacao (
     id INT AUTO_INCREMENT PRIMARY KEY,
     perfil_id INT NOT NULL,
     video_id INT NOT NULL,
     data_hora DATETIME NOT NULL,
-    progresso INT
+    progresso INT,
+    FOREIGN KEY (perfil_id) REFERENCES Perfil(id),
+    FOREIGN KEY (video_id) REFERENCES Video(id)
+);
+
+-- Avaliação (relaciona Perfil x Vídeo, com atributos extras)
+CREATE TABLE Avaliacao (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    perfil_id INT NOT NULL,
+    video_id INT NOT NULL,
+    nota INT CHECK (nota BETWEEN 1 AND 5),
+    comentario TEXT,
+    FOREIGN KEY (perfil_id) REFERENCES Perfil(id),
+    FOREIGN KEY (video_id) REFERENCES Video(id)
 );
 
 
