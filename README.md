@@ -90,18 +90,35 @@ CREATE TABLE Avaliacao (
     FOREIGN KEY (video_id) REFERENCES Video(id)
 );
 
+### Exemplo de inserções
 
--- Inserção de usuários
-INSERT INTO Usuario (nome, email, senha) VALUES 
+-- Usuários
+INSERT INTO Usuario (nome, email, senha) VALUES
 ('Anderson Silva', 'anderson@email.com', 'senha123'),
 ('Mariana Costa', 'mariana@email.com', 'senha456');
 
--- Inserção de vídeos
-INSERT INTO Video (titulo, descricao, duracao) VALUES
-('Missão Explosiva', 'Agente especial tenta impedir ataque terrorista.', 125),
-('Rir é o Melhor Remédio', 'Stand-up de humor ácido.', 90);
+-- Perfis
+INSERT INTO Perfil (nome, usuario_id) VALUES
+('Anderson - Pessoal', 1),
+('Mariana - Principal', 2);
 
--- Inserção de visualizações
+-- Categorias
+INSERT INTO Categoria (nome) VALUES
+('Ação'),
+('Comédia');
+
+-- Vídeos
+INSERT INTO Video (titulo, descricao, duracao, categoria_id) VALUES
+('Missão Explosiva', 'Agente especial tenta impedir ataque terrorista.', 125, 1),
+('Rir é o Melhor Remédio', 'Stand-up de humor ácido.', 90, 2);
+
+-- Visualizações
 INSERT INTO Visualizacao (perfil_id, video_id, data_hora, progresso) VALUES
 (1, 1, '2025-09-01 20:15:00', 60),
 (2, 2, '2025-09-03 18:30:00', 50);
+
+-- Avaliações
+INSERT INTO Avaliacao (perfil_id, video_id, nota, comentario) VALUES
+(1, 1, 5, 'Filme incrível, cheio de ação.'),
+(2, 2, 4, 'Stand-up divertido.');
+
