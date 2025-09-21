@@ -7,7 +7,7 @@
 | Equipe    | Email                  |
 |-----------|-----------------------|
 | Anderson  | andersonlsoliveira02@gmail.com    |
-| Vitor Morini  |     |
+| Vitor Morini  |  vitor.morini@univille.br   |
 
 ## Configurações
 
